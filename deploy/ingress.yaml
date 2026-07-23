@@ -4,16 +4,11 @@ metadata:
   name: msp-homepage
   namespace: www
   annotations:
-    # 검증되면 letsencrypt-prod로 전환 (platform/ingress/CLAUDE.md 4번 정책)
-    cert-manager.io/cluster-issuer: letsencrypt-staging
-    # F5 NGINX Ingress Controller 전용 애노테이션(nginx.ingress.kubernetes.io/*
-    # 아님) - 인증서가 아직 없는 상태에서 HTTPS 강제 리다이렉트가 걸리면
-    # cert-manager의 HTTP-01 self-check가 TLS 핸드셰이크 단계에서 깨진다
-    # (hermes.daon.cloud에서 실제로 겪은 문제, 처음부터 박아둠).
-    nginx.org/ssl-redirect: "False"
-    # Certificate 생성 시점에만 적용되는 애노테이션이라 나중에 추가하면
-    # 소용없음 - 처음부터 박아둠 (루트 CLAUDE.md 참고).
-    acme.cert-manager.io/http01-edit-in-place: "true"
+    # letsencrypt-staging으로 먼저 검증 완료(2026-07-23) 후 prod로 전환.
+    # letsencrypt-prod/letsencrypt-staging 둘 다 DNS-01(cert-manager-webhook-oci)
+    # 이라 HTTP 경로/self-check 관련 애노테이션(http01-edit-in-place,
+    # ssl-redirect)은 더 이상 필요 없음 - platform/ingress/CLAUDE.md 참고.
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   tls:
