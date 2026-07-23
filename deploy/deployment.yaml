@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:b835548
+          image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:1bd5b0c
           ports: [{ containerPort: 3000 }]
           readinessProbe:
             httpGet: { path: /api/health, port: 3000 }
