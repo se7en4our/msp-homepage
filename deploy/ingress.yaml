@@ -12,10 +12,20 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-    - hosts: ["www.daon.cloud"]
+    - hosts: ["www.daon.cloud", "daon.cloud"]
       secretName: msp-homepage-tls
   rules:
     - host: www.daon.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: msp-homepage
+                port:
+                  number: 80
+    - host: daon.cloud
       http:
         paths:
           - path: /
