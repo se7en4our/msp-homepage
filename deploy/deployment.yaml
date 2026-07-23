@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msp-homepage
+  namespace: www
+  labels: { app: msp-homepage }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: msp-homepage } }
+  template:
+    metadata: { labels: { app: msp-homepage } }
+    spec:
+      containers:
+        - name: web
+          image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:dev
+          ports: [{ containerPort: 3000 }]
+          readinessProbe:
+            httpGet: { path: /api/health, port: 3000 }
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet: { path: /api/health, port: 3000 }
+            initialDelaySeconds: 10
+          resources:
+            requests: { cpu: "50m", memory: "128Mi" }
+            limits: { cpu: "250m", memory: "256Mi" }

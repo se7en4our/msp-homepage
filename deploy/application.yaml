@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: msp-homepage
+  namespace: argocd
+spec:
+  project: daon-prod
+  source:
+    repoURL: https://github.com/se7en4our/msp-homepage.git
+    targetRevision: main
+    path: deploy
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: www
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
