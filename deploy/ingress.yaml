@@ -6,9 +6,13 @@ metadata:
   annotations:
     # letsencrypt-staging으로 먼저 검증 완료(2026-07-23) 후 prod로 전환.
     # letsencrypt-prod/letsencrypt-staging 둘 다 DNS-01(cert-manager-webhook-oci)
-    # 이라 HTTP 경로/self-check 관련 애노테이션(http01-edit-in-place,
-    # ssl-redirect)은 더 이상 필요 없음 - platform/ingress/CLAUDE.md 참고.
+    # 이라 HTTP 챌린지 전용 애노테이션(http01-edit-in-place)은 더 이상
+    # 필요 없음 - platform/ingress/CLAUDE.md 참고. 단, ssl-redirect는
+    # 인증서 발급 방식과 무관하게 방문자 트래픽을 HTTPS로 강제하는
+    # 별개 설정이라 계속 필요함 (2026-08-01, hallmark 검토로 발견:
+    # 이전에 같이 제거되면서 HTTP 평문 접속이 리다이렉트 없이 열려있었음).
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
