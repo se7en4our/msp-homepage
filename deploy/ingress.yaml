@@ -11,8 +11,12 @@ metadata:
     # 인증서 발급 방식과 무관하게 방문자 트래픽을 HTTPS로 강제하는
     # 별개 설정이라 계속 필요함 (2026-08-01, hallmark 검토로 발견:
     # 이전에 같이 제거되면서 HTTP 평문 접속이 리다이렉트 없이 열려있었음).
+    # 이 클러스터의 IngressClass "nginx"는 community ingress-nginx가 아니라
+    # F5/NGINX Inc의 nginx.org/ingress-controller(Helm 차트 nginx-ingress)라
+    # 애노테이션도 nginx.org/* 네임스페이스를 써야 함 - nginx.ingress.kubernetes.io/*는
+    # 이 컨트롤러가 인식하지 못해 조용히 무시됨.
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.org/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
