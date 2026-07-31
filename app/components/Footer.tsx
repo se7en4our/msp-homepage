@@ -9,6 +9,13 @@ export default function Footer() {
           <ObfuscatedEmail className="hover:text-brand-600 dark:hover:text-brand-400" />
         </p>
       </div>
+      <div className="mx-auto mt-4 max-w-6xl px-6 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+        <p>
+          다온클라우드 · 대표 홍준호 · 사업자등록번호 649-24-01886
+          <br />
+          서울시 서초구 강남대로 18길 15-6
+        </p>
+      </div>
       <div className="mx-auto mt-4 flex max-w-6xl gap-4 px-6 text-xs text-slate-500 dark:text-slate-400">
         <a href="/privacy" className="hover:text-brand-600 dark:hover:text-brand-400">
           개인정보처리방침
