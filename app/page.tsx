@@ -1,27 +1,441 @@
+import ContactForm from "./components/ContactForm";
+
 const SHA = process.env.BUILD_SHA ?? "dev";
 const BUILT_AT = process.env.BUILD_TIME ?? "";
 
+const CLOUD_PROVIDERS = ["AWS", "OCI", "GCP", "Azure"];
+
+const SERVICES = [
+  {
+    title: "멀티클라우드 운영/모니터링",
+    description:
+      "AWS·OCI·GCP·Azure에 흩어진 인프라를 한 팀이 통합 모니터링하고, 장애를 사전에 감지해 대응합니다.",
+    icon: IconMonitor,
+  },
+  {
+    title: "클라우드 마이그레이션",
+    description:
+      "온프레미스에서 클라우드로, 혹은 클라우드 간 이전까지 - 다운타임을 최소화하는 이전 계획을 설계하고 직접 수행합니다.",
+    icon: IconMigrate,
+  },
+  {
+    title: "비용 최적화 (FinOps)",
+    description:
+      "리소스 사용 패턴을 분석해 불필요한 지출을 줄이고, 예산 안에서 최대 효율을 내는 아키텍처를 제안합니다.",
+    icon: IconCost,
+  },
+  {
+    title: "보안/컴플라이언스",
+    description:
+      "접근 권한, 네트워크 격리, 백업 정책까지 - 사고 전에 막는 보안 기본기를 클라우드 전반에 일관되게 적용합니다.",
+    icon: IconShield,
+  },
+];
+
+const CASES = [
+  {
+    industry: "제조업",
+    title: "노후 온프레미스 서버를 AWS로 이전",
+    before: "장애 대응 인력 부재, 백업 정책 없이 운영되던 사내 서버",
+    result: "단계적 이전으로 다운타임 없이 전환, 이중화 백업과 상시 모니터링 체계 확보",
+  },
+  {
+    industry: "이커머스",
+    title: "세일 기간 트래픽 급증 대응 체계 구축",
+    before: "세일마다 수동으로 서버를 증설하고, 부하가 몰리면 응답 지연 발생",
+    result: "오토스케일링 도입으로 트래픽 변화에 자동 대응, 운영 인력 부담 해소",
+  },
+  {
+    industry: "헬스케어",
+    title: "2개 클라우드에 흩어진 인프라 비용 재점검",
+    before: "GCP·AWS를 함께 쓰면서 사용하지 않는 리소스와 중복 비용 누적",
+    result: "리소스 사용 패턴 분석 후 정리, 매달 비용 리포트로 지출 가시성 확보",
+  },
+];
+
+const FAQS = [
+  {
+    question: "계약은 어떤 방식으로 진행되나요?",
+    answer:
+      "월 단위 운영 계약과 프로젝트 단위(이전/구축) 계약을 함께 운영합니다. 진단 후 필요한 범위에 맞춰 제안드립니다.",
+  },
+  {
+    question: "장애가 발생하면 얼마나 빨리 대응하나요?",
+    answer:
+      "상시 모니터링 체계로 장애를 사전에 감지하며, 계약 시 협의한 대응 시간(SLA) 내에 1차 대응을 시작합니다.",
+  },
+  {
+    question: "이미 특정 클라우드 하나만 쓰고 있어도 괜찮나요?",
+    answer:
+      "네, 단일 클라우드만 사용 중이어도 상관없습니다. 멀티클라우드 전환 여부와 무관하게 현재 인프라 운영·최적화부터 시작할 수 있습니다.",
+  },
+  {
+    question: "비용은 어떻게 산정되나요?",
+    answer:
+      "인프라 규모, 모니터링 범위, 대응 시간 요구 수준에 따라 산정됩니다. 무료 진단 후 예산에 맞는 견적을 안내드립니다.",
+  },
+  {
+    question: "온보딩에는 얼마나 걸리나요?",
+    answer:
+      "현재 인프라 진단에 보통 1~2주, 이후 모니터링·운영 체계 이관까지 포함하면 2~4주 정도 소요됩니다. 규모에 따라 달라질 수 있습니다.",
+  },
+];
+
+const WHY_US = [
+  {
+    stat: "1개 팀",
+    label: "여러 클라우드, 하나의 창구",
+    description: "클라우드마다 다른 담당자를 찾을 필요 없이 다온클라우드 한 팀이 전체를 책임집니다.",
+  },
+  {
+    stat: "중소기업 전담",
+    label: "우리 규모에 맞는 제안",
+    description: "대기업向 과잉 설계 대신, 실제 트래픽과 예산에 맞는 실용적인 구성을 제안합니다.",
+  },
+  {
+    stat: "상시 대응",
+    label: "장애는 기다려주지 않습니다",
+    description: "모니터링부터 1차 대응까지, 사업이 멈추지 않도록 상시 대응 체계를 운영합니다.",
+  },
+];
+
+const PROCESS = [
+  { step: "01", title: "진단", description: "현재 인프라와 비용, 운영 리스크를 점검합니다." },
+  { step: "02", title: "설계", description: "목표와 예산에 맞는 아키텍처와 이전 계획을 제안합니다." },
+  { step: "03", title: "이전/구축", description: "다운타임을 최소화하며 단계적으로 실행합니다." },
+  { step: "04", title: "운영", description: "이후에도 모니터링·최적화·대응을 지속합니다." },
+];
+
 export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "center",
-        fontFamily: "system-ui",
-        textAlign: "center",
-      }}
-    >
-      <div>
-        <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>다온클라우드</h1>
-        <p style={{ color: "#555" }}>중소기업을 위한 멀티 클라우드 MSP · 준비 중</p>
-        <p style={{ marginTop: "1.5rem" }}>
-          <a href="mailto:hello@daon.cloud">hello@daon.cloud</a>
-        </p>
-        <footer style={{ marginTop: "3rem", fontSize: "0.75rem", color: "#999" }}>
-          build {SHA} {BUILT_AT && `· ${BUILT_AT}`}
-        </footer>
+    <div className="flex min-h-screen flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <Services />
+        <WhyUs />
+        <Cases />
+        <Process />
+        <FAQ />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-10 border-b border-slate-200/80 bg-white/80 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#" className="text-lg font-bold tracking-tight">
+          다온클라우드
+        </a>
+        <nav className="hidden gap-8 text-sm font-medium text-slate-600 dark:text-slate-300 sm:flex">
+          <a href="#services" className="hover:text-brand-600 dark:hover:text-brand-400">
+            서비스
+          </a>
+          <a href="#why" className="hover:text-brand-600 dark:hover:text-brand-400">
+            왜 다온클라우드
+          </a>
+          <a href="#cases" className="hover:text-brand-600 dark:hover:text-brand-400">
+            사례
+          </a>
+          <a href="#process" className="hover:text-brand-600 dark:hover:text-brand-400">
+            프로세스
+          </a>
+          <a href="#faq" className="hover:text-brand-600 dark:hover:text-brand-400">
+            FAQ
+          </a>
+        </nav>
+        <a
+          href="#contact"
+          className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700"
+        >
+          문의하기
+        </a>
       </div>
-    </main>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 right-[-10%] h-96 w-96 rounded-full bg-brand-300/30 blur-3xl dark:bg-brand-700/20"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-24 left-[-5%] h-72 w-72 rounded-full bg-brand-200/30 blur-3xl dark:bg-brand-800/20"
+      />
+      <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-16 sm:pt-24">
+        <p className="text-sm font-semibold text-brand-600 dark:text-brand-400">
+          중소기업을 위한 멀티클라우드 MSP
+        </p>
+        <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+          여러 클라우드를 오가는 부담,
+          <br />
+          다온클라우드 한 팀이 대신 짊어집니다.
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+          AWS, OCI, GCP, Azure - 흩어진 클라우드 인프라를 관리·이전·최적화하는
+          전담 운영팀이 되어드립니다. 인프라 담당자 없이도 안정적으로 운영할
+          수 있도록 처음부터 끝까지 함께합니다.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <a
+            href="#contact"
+            className="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+          >
+            무료 진단 문의하기
+          </a>
+          <a
+            href="mailto:hello@daon.cloud"
+            className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-brand-400"
+          >
+            hello@daon.cloud
+          </a>
+        </div>
+        <div className="mt-12 flex flex-wrap items-center gap-3">
+          <span className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            지원 클라우드
+          </span>
+          {CLOUD_PROVIDERS.map((provider) => (
+            <span
+              key={provider}
+              className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+            >
+              {provider}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="services" className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          무엇을 도와드리나요
+        </h2>
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+          인프라 구축부터 운영, 이전, 비용 관리까지 - 클라우드 운영에 필요한
+          전 과정을 담당합니다.
+        </p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {SERVICES.map((service) => (
+            <div
+              key={service.title}
+              className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/40 dark:text-brand-400">
+                <service.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold">{service.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {service.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyUs() {
+  return (
+    <section id="why" className="py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          왜 다온클라우드인가요
+        </h2>
+        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+          {WHY_US.map((item) => (
+            <div key={item.label}>
+              <p className="text-2xl font-bold text-brand-600 dark:text-brand-400">
+                {item.stat}
+              </p>
+              <p className="mt-2 font-semibold">{item.label}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Cases() {
+  return (
+    <section id="cases" className="py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          이런 요청을 도와드렸습니다
+        </h2>
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+          고객사명은 비공개 계약에 따라 표기하지 않으며, 업종과 상황만 소개합니다.
+        </p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          {CASES.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950"
+            >
+              <span className="inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">
+                {item.industry}
+              </span>
+              <h3 className="mt-3 text-base font-semibold">{item.title}</h3>
+              <dl className="mt-4 space-y-3 text-sm">
+                <div>
+                  <dt className="font-medium text-slate-500 dark:text-slate-400">Before</dt>
+                  <dd className="mt-1 leading-relaxed text-slate-600 dark:text-slate-300">
+                    {item.before}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-slate-500 dark:text-slate-400">After</dt>
+                  <dd className="mt-1 leading-relaxed text-slate-600 dark:text-slate-300">
+                    {item.result}
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="process" className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          진행 프로세스
+        </h2>
+        <div className="mt-10 grid gap-6 sm:grid-cols-4">
+          {PROCESS.map((item) => (
+            <div key={item.step}>
+              <p className="text-sm font-bold text-brand-500">{item.step}</p>
+              <p className="mt-2 font-semibold">{item.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section id="faq" className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
+      <div className="mx-auto max-w-3xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          자주 묻는 질문
+        </h2>
+        <div className="mt-10 space-y-3">
+          {FAQS.map((item) => (
+            <details
+              key={item.question}
+              className="group rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold marker:content-none">
+                {item.question}
+                <span className="shrink-0 text-brand-600 transition group-open:rotate-45 dark:text-brand-400">
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="py-20">
+      <div className="mx-auto max-w-2xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">문의하기</h2>
+        <p className="mt-3 text-slate-600 dark:text-slate-300">
+          간단한 정보만 남겨주시면 담당자가 확인 후 연락드립니다.
+        </p>
+        <div className="mt-8">
+          <ContactForm />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-slate-200 py-10 dark:border-slate-800">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
+        <p>© {new Date().getFullYear()} 다온클라우드</p>
+        <p>
+          <a href="mailto:hello@daon.cloud" className="hover:text-brand-600 dark:hover:text-brand-400">
+            hello@daon.cloud
+          </a>
+        </p>
+        <p className="text-xs text-slate-400 dark:text-slate-500">
+          build {SHA} {BUILT_AT && `· ${BUILT_AT}`}
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+type IconProps = { className?: string };
+
+function IconMonitor({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+      <rect x="3" y="4" width="18" height="12" rx="1.5" />
+      <path strokeLinecap="round" d="M8 20h8M12 16v4" />
+    </svg>
+  );
+}
+
+function IconMigrate({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h13M13 3l4 4-4 4" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20 17H7M11 13l-4 4 4 4" />
+    </svg>
+  );
+}
+
+function IconCost({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path strokeLinecap="round" d="M12 7v10M14.5 9.5c0-1.1-1.1-2-2.5-2s-2.5.7-2.5 1.8c0 2.6 5 1.2 5 3.8 0 1.1-1.1 1.9-2.5 1.9s-2.5-.9-2.5-2" />
+    </svg>
+  );
+}
+
+function IconShield({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+    </svg>
   );
 }

@@ -14,6 +14,17 @@ spec:
         - name: web
           image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:1bd5b0c
           ports: [{ containerPort: 3000 }]
+          env:
+            # msp-homepage-secrets는 이 (퍼블릭) 레포 밖에서 클러스터에 직접
+            # 생성한다 - Slack Incoming Webhook URL을 git에 커밋하지 않기 위함.
+            # optional: true라 시크릿이 아직 없어도 파드는 정상 기동하고,
+            # 문의 폼만 500을 반환한다 (app/api/contact/route.ts 참고).
+            - name: SLACK_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: msp-homepage-secrets
+                  key: slack-webhook-url
+                  optional: true
           readinessProbe:
             httpGet: { path: /api/health, port: 3000 }
             initialDelaySeconds: 5
