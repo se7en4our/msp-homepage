@@ -7,6 +7,7 @@ type ContactPayload = {
   phone?: string;
   message?: string;
   website?: string;
+  consent?: string;
 };
 
 function isValidEmail(email: string) {
@@ -40,6 +41,9 @@ export async function POST(request: Request) {
 
   if (!name || !email || !message) {
     return Response.json({ error: "이름, 이메일, 문의 내용을 입력해주세요." }, { status: 400 });
+  }
+  if (payload.consent !== "yes") {
+    return Response.json({ error: "개인정보 수집·이용에 동의해주세요." }, { status: 400 });
   }
   if (!isValidEmail(email)) {
     return Response.json({ error: "이메일 형식을 확인해주세요." }, { status: 400 });

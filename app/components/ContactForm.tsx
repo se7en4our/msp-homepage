@@ -84,6 +84,31 @@ export default function ContactForm() {
         />
       </label>
 
+      <label className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+        <input
+          type="checkbox"
+          name="consent"
+          value="yes"
+          required
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-600 focus:ring-2 focus:ring-brand-100 dark:border-slate-700"
+        />
+        <span>
+          <span className="font-medium text-slate-700 dark:text-slate-200">(필수)</span>{" "}
+          개인정보 수집·이용에 동의합니다.{" "}
+          <a
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-600 underline hover:text-brand-700 dark:text-brand-400"
+          >
+            방침 전문 보기
+          </a>
+          <br />
+          수집 항목: 이름, 회사명, 이메일, 연락처 · 이용 목적: 문의 응대 및 서비스 상담 · 보유
+          기간: 문의 처리 완료 후 1년
+        </span>
+      </label>
+
       {status === "error" && (
         <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
       )}
