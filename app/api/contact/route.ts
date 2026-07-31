@@ -8,6 +8,7 @@ type ContactPayload = {
   message?: string;
   website?: string;
   consent?: string;
+  situation?: string;
 };
 
 function isValidEmail(email: string) {
@@ -38,9 +39,10 @@ export async function POST(request: Request) {
   const email = payload.email?.trim() ?? "";
   const phone = payload.phone?.trim() ?? "";
   const message = payload.message?.trim() ?? "";
+  const situation = payload.situation?.trim() ?? "";
 
-  if (!name || !email || !message) {
-    return Response.json({ error: "이름, 이메일, 문의 내용을 입력해주세요." }, { status: 400 });
+  if (!name || !company || !email || !message || !situation) {
+    return Response.json({ error: "이름, 회사명, 이메일, 현재 상황, 문의 내용을 입력해주세요." }, { status: 400 });
   }
   if (payload.consent !== "yes") {
     return Response.json({ error: "개인정보 수집·이용에 동의해주세요." }, { status: 400 });
@@ -48,16 +50,24 @@ export async function POST(request: Request) {
   if (!isValidEmail(email)) {
     return Response.json({ error: "이메일 형식을 확인해주세요." }, { status: 400 });
   }
-  if (name.length > 100 || company.length > 100 || email.length > 200 || phone.length > 50 || message.length > 4000) {
+  if (
+    name.length > 100 ||
+    company.length > 100 ||
+    email.length > 200 ||
+    phone.length > 50 ||
+    message.length > 4000 ||
+    situation.length > 100
+  ) {
     return Response.json({ error: "입력 길이를 확인해주세요." }, { status: 400 });
   }
 
   const lines = [
     `*새 문의 - 다온클라우드 홈페이지*`,
     `*이름:* ${name}`,
-    company && `*회사:* ${company}`,
+    `*회사:* ${company}`,
     `*이메일:* ${email}`,
     phone && `*연락처:* ${phone}`,
+    `*현재 상황:* ${situation}`,
     `*내용:*\n${message}`,
   ].filter(Boolean);
 

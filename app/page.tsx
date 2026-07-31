@@ -95,7 +95,7 @@ const WHY_US = [
   {
     stat: "중소기업 전담",
     label: "우리 규모에 맞는 제안",
-    description: "대기업向 과잉 설계 대신, 실제 트래픽과 예산에 맞는 실용적인 구성을 제안합니다.",
+    description: "대기업용 과잉 설계 대신, 실제 트래픽과 예산에 맞는 실용적인 구성을 제안합니다.",
   },
   {
     stat: "상시 대응",
@@ -108,14 +108,17 @@ const DIFFERENTIATORS = [
   {
     title: "심사 통과를 전제로 한 설계",
     description: "고객사 보안 점검표에 나오는 항목을 구축 단계에서 미리 반영합니다.",
+    note: "나중에 채우면 재구축입니다.",
   },
   {
     title: "증적이 남는 운영",
     description: "권한 변경·접근 이력·백업 검증 결과를 문서로 축적합니다. 심사 요청 시 바로 제출 가능합니다.",
+    note: "“기록이 없습니다”는 통제가 없다는 뜻으로 읽힙니다.",
   },
   {
     title: "법적 의무 사항 대응",
     description: "개인정보 안전성 확보조치 기준은 회사 규모와 무관하게 적용됩니다. 갭 분석부터 구현까지 함께합니다.",
+    note: "매출 규모는 면제 사유가 아닙니다.",
   },
 ];
 
@@ -202,19 +205,37 @@ function Differentiator() {
     <section className="border-t border-slate-200 py-20 dark:border-slate-800">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="max-w-2xl text-2xl font-bold tracking-tight sm:text-3xl">
-          일반 MSP는 서버를 봅니다. 우리는 15년째 이 일만 합니다.
+          15년간 저희가 본 건 서버가 아니라,
+          <br />
+          서버 때문에 깨진 계약이었습니다.
         </h2>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          첫 대기업·공공 고객사와 계약이 눈앞인데 보안 점검표에서 막히는 팀이 많습니다.
-          접근권한 관리, 로그 보관, 암호화, 백업 검증 - 심사에서 실제로 걸리는 항목은 정해져 있습니다.
+          첫 대기업·공공 고객사와 계약이 눈앞인데, 마지막 단계인 보안 점검표에서 막히는 팀을
+          자주 봅니다.
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          다온클라우드는 대기업부터 중소기업, 스타트업까지{" "}
+          서버는 멀쩡히 돌고 있었습니다. 문제는{" "}
           <strong className="font-semibold text-slate-900 dark:text-slate-100">
-            15년간 클라우드 MSP 현장에서 인프라를 설계·운영해 온 경험
+            접근권한을 누가 언제 부여했는지 증명할 수 없다는 것
           </strong>
-          으로 심사에서 무엇이 실제로 걸리는지 압니다. 나중에 뜯어고치는 대신, 처음부터 심사를
-          통과하는 구조로 만듭니다.
+          , 로그 보관 기간이 기준에 못 미친다는 것, 백업은 돌지만 복구를 해본 적이 없다는
+          것이었습니다.
+        </p>
+        <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
+          심사에서 실제로 걸리는 항목은 정해져 있습니다. 그리고 그 항목들은{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            구축이 끝난 뒤에 채우려면 몇 배로 비쌉니다.
+          </strong>
+        </p>
+        <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
+          다온클라우드는 대기업부터 스타트업까지{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            15년간 현장을 지켜온 엔지니어가 직접
+          </strong>{" "}
+          인프라를 설계·운영하며 그 지점들을 반복해서 봐 왔습니다. 나중에 뜯어고치는 대신,{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            처음부터 통과하는 구조로 만듭니다.
+          </strong>
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
           {DIFFERENTIATORS.map((item) => (
@@ -226,8 +247,22 @@ function Differentiator() {
               <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {item.description}
               </p>
+              <p className="mt-2 text-sm italic leading-relaxed text-slate-500 dark:text-slate-400">
+                {item.note}
+              </p>
             </div>
           ))}
+        </div>
+        <div className="mt-10">
+          <p className="max-w-xl text-slate-600 dark:text-slate-300">
+            지금 인프라가 심사를 통과할 수 있는 상태인지, 진단에서 항목별로 확인해 드립니다.
+          </p>
+          <a
+            href="#contact"
+            className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+          >
+            보안 점검 항목 진단 신청
+          </a>
         </div>
       </div>
     </section>

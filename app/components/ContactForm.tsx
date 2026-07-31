@@ -4,6 +4,15 @@ import { useState, type FormEvent } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+const SITUATIONS = [
+  "온프레미스 → 클라우드 이전 검토",
+  "클라우드 운영 인력 부족",
+  "클라우드 비용 절감 필요",
+  "고객사 보안 심사 대응 필요",
+  "OCI 이전·운영 문의",
+  "기타",
+];
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,7 +68,7 @@ export default function ContactForm() {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="이름" name="name" autoComplete="name" required />
-        <Field label="회사명" name="company" autoComplete="organization" />
+        <Field label="회사명" name="company" autoComplete="organization" required />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
@@ -71,6 +80,29 @@ export default function ContactForm() {
         />
         <Field label="연락처" name="phone" autoComplete="tel" />
       </div>
+      <fieldset className="grid gap-2 text-sm">
+        <legend className="font-medium text-slate-700 dark:text-slate-200">
+          현재 상황
+          <span className="text-brand-600"> *</span>
+        </legend>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {SITUATIONS.map((option) => (
+            <label
+              key={option}
+              className="flex items-center gap-2 text-slate-600 dark:text-slate-300"
+            >
+              <input
+                type="radio"
+                name="situation"
+                value={option}
+                required
+                className="h-4 w-4 border-slate-300 text-brand-600 focus:ring-2 focus:ring-brand-100 dark:border-slate-700"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <label className="grid gap-1.5 text-sm">
         <span className="font-medium text-slate-700 dark:text-slate-200">
           문의 내용
@@ -104,7 +136,7 @@ export default function ContactForm() {
             방침 전문 보기
           </a>
           <br />
-          수집 항목: 이름, 회사명, 이메일, 연락처 · 이용 목적: 문의 응대 및 서비스 상담 · 보유
+          수집 항목: 이름, 회사명, 이메일, 연락처, 현재 상황 · 이용 목적: 문의 응대 및 서비스 상담 · 보유
           기간: 문의 처리 완료 후 1년
         </span>
       </label>
