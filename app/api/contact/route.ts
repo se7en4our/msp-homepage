@@ -6,6 +6,7 @@ type ContactPayload = {
   email?: string;
   phone?: string;
   message?: string;
+  website?: string;
 };
 
 function isValidEmail(email: string) {
@@ -24,6 +25,11 @@ export async function POST(request: Request) {
     payload = await request.json();
   } catch {
     return Response.json({ error: "잘못된 요청입니다." }, { status: 400 });
+  }
+
+  if (payload.website?.trim()) {
+    // Honeypot field only a bot would fill in — pretend success without notifying Slack.
+    return Response.json({ ok: true });
   }
 
   const name = payload.name?.trim() ?? "";

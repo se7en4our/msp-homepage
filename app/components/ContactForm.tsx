@@ -51,6 +51,12 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4">
+      <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+        <label>
+          웹사이트
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="이름" name="name" autoComplete="name" required />
         <Field label="회사명" name="company" autoComplete="organization" />

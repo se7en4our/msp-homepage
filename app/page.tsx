@@ -1,4 +1,5 @@
 import ContactForm from "./components/ContactForm";
+import ObfuscatedEmail from "./components/ObfuscatedEmail";
 
 const SHA = process.env.BUILD_SHA ?? "dev";
 const BUILT_AT = process.env.BUILD_TIME ?? "";
@@ -191,12 +192,7 @@ function Hero() {
           >
             무료 진단 문의하기
           </a>
-          <a
-            href="mailto:hello@daon.cloud"
-            className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-brand-400"
-          >
-            hello@daon.cloud
-          </a>
+          <ObfuscatedEmail className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-brand-400" />
         </div>
         <div className="mt-12 flex flex-wrap items-center gap-3">
           <span className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
@@ -390,9 +386,7 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
         <p>© {new Date().getFullYear()} 다온클라우드</p>
         <p>
-          <a href="mailto:hello@daon.cloud" className="hover:text-brand-600 dark:hover:text-brand-400">
-            hello@daon.cloud
-          </a>
+          <ObfuscatedEmail className="hover:text-brand-600 dark:hover:text-brand-400" />
         </p>
         <p className="text-xs text-slate-400 dark:text-slate-500">
           build {SHA} {BUILT_AT && `· ${BUILT_AT}`}
