@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:981066b
+          image: yny.ocir.io/axbeonwnkylm/chuncheon-prod/msp-homepage:252d9a9
           ports: [{ containerPort: 3000 }]
           env:
             # msp-homepage-secrets는 이 (퍼블릭) 레포 밖에서 클러스터에 직접
