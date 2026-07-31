@@ -1,8 +1,7 @@
 import ContactForm from "./components/ContactForm";
 import ObfuscatedEmail from "./components/ObfuscatedEmail";
-
-const SHA = process.env.BUILD_SHA ?? "dev";
-const BUILT_AT = process.env.BUILD_TIME ?? "";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const CLOUD_PROVIDERS = ["AWS", "OCI", "GCP", "Azure"];
 
@@ -84,6 +83,11 @@ const FAQS = [
 
 const WHY_US = [
   {
+    stat: "15년",
+    label: "클라우드 MSP 외길 경력",
+    description: "대기업부터 스타트업까지, 다양한 규모의 인프라를 직접 설계·운영해왔습니다.",
+  },
+  {
     stat: "1개 팀",
     label: "여러 클라우드, 하나의 창구",
     description: "클라우드마다 다른 담당자를 찾을 필요 없이 다온클라우드 한 팀이 전체를 책임집니다.",
@@ -100,6 +104,21 @@ const WHY_US = [
   },
 ];
 
+const DIFFERENTIATORS = [
+  {
+    title: "심사 통과를 전제로 한 설계",
+    description: "고객사 보안 점검표에 나오는 항목을 구축 단계에서 미리 반영합니다.",
+  },
+  {
+    title: "증적이 남는 운영",
+    description: "권한 변경·접근 이력·백업 검증 결과를 문서로 축적합니다. 심사 요청 시 바로 제출 가능합니다.",
+  },
+  {
+    title: "법적 의무 사항 대응",
+    description: "개인정보 안전성 확보조치 기준은 회사 규모와 무관하게 적용됩니다. 갭 분석부터 구현까지 함께합니다.",
+  },
+];
+
 const PROCESS = [
   { step: "01", title: "진단", description: "현재 인프라와 비용, 운영 리스크를 점검합니다." },
   { step: "02", title: "설계", description: "목표와 예산에 맞는 아키텍처와 이전 계획을 제안합니다." },
@@ -113,6 +132,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <Differentiator />
         <Services />
         <WhyUs />
         <Cases />
@@ -122,41 +142,6 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  );
-}
-
-function Header() {
-  return (
-    <header className="sticky top-0 z-10 border-b border-slate-200/80 bg-white/80 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="text-lg font-bold tracking-tight">
-          다온클라우드
-        </a>
-        <nav className="hidden gap-8 text-sm font-medium text-slate-600 dark:text-slate-300 sm:flex">
-          <a href="#services" className="hover:text-brand-600 dark:hover:text-brand-400">
-            서비스
-          </a>
-          <a href="#why" className="hover:text-brand-600 dark:hover:text-brand-400">
-            왜 다온클라우드
-          </a>
-          <a href="#cases" className="hover:text-brand-600 dark:hover:text-brand-400">
-            사례
-          </a>
-          <a href="#process" className="hover:text-brand-600 dark:hover:text-brand-400">
-            프로세스
-          </a>
-          <a href="#faq" className="hover:text-brand-600 dark:hover:text-brand-400">
-            FAQ
-          </a>
-        </nav>
-        <a
-          href="#contact"
-          className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700"
-        >
-          문의하기
-        </a>
-      </div>
-    </header>
   );
 }
 
@@ -212,6 +197,43 @@ function Hero() {
   );
 }
 
+function Differentiator() {
+  return (
+    <section className="border-t border-slate-200 py-20 dark:border-slate-800">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="max-w-2xl text-2xl font-bold tracking-tight sm:text-3xl">
+          일반 MSP는 서버를 봅니다. 우리는 15년째 이 일만 합니다.
+        </h2>
+        <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
+          첫 대기업·공공 고객사와 계약이 눈앞인데 보안 점검표에서 막히는 팀이 많습니다.
+          접근권한 관리, 로그 보관, 암호화, 백업 검증 - 심사에서 실제로 걸리는 항목은 정해져 있습니다.
+        </p>
+        <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
+          다온클라우드는 대기업부터 중소기업, 스타트업까지{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            15년간 클라우드 MSP 현장에서 인프라를 설계·운영해 온 경험
+          </strong>
+          으로 심사에서 무엇이 실제로 걸리는지 압니다. 나중에 뜯어고치는 대신, 처음부터 심사를
+          통과하는 구조로 만듭니다.
+        </p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          {DIFFERENTIATORS.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950"
+            >
+              <h3 className="font-semibold">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Services() {
   return (
     <section id="services" className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40">
@@ -251,7 +273,7 @@ function WhyUs() {
         <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
           왜 다온클라우드인가요
         </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {WHY_US.map((item) => (
             <div key={item.label}>
               <p className="text-2xl font-bold text-brand-600 dark:text-brand-400">
@@ -377,22 +399,6 @@ function Contact() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-slate-200 py-10 dark:border-slate-800">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
-        <p>© {new Date().getFullYear()} 다온클라우드</p>
-        <p>
-          <ObfuscatedEmail className="hover:text-brand-600 dark:hover:text-brand-400" />
-        </p>
-        <p className="text-xs text-slate-400 dark:text-slate-500">
-          build {SHA} {BUILT_AT && `· ${BUILT_AT}`}
-        </p>
-      </div>
-    </footer>
   );
 }
 
