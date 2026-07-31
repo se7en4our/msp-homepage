@@ -1,5 +1,4 @@
 import ContactForm from "./components/ContactForm";
-import ObfuscatedEmail from "./components/ObfuscatedEmail";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -180,7 +179,6 @@ function Hero() {
           >
             무료 진단 문의하기
           </a>
-          <ObfuscatedEmail className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-brand-400" />
         </div>
         <div className="mt-12 flex flex-wrap items-center gap-3">
           <span className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
