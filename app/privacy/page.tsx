@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 export const metadata: Metadata = {
   title: "개인정보처리방침 | 다온클라우드",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://daon.cloud/privacy" },
 };
 
 const SECTIONS = [

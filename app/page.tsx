@@ -180,7 +180,7 @@ function Hero() {
           <ObfuscatedEmail className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-brand-500 dark:hover:text-brand-400" />
         </div>
         <div className="mt-12 flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <span className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
             지원 클라우드
           </span>
           {CLOUD_PROVIDERS.map((provider) => (
@@ -406,7 +406,14 @@ type IconProps = { className?: string };
 
 function IconMonitor({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      className={className}
+      aria-hidden="true"
+    >
       <rect x="3" y="4" width="18" height="12" rx="1.5" />
       <path strokeLinecap="round" d="M8 20h8M12 16v4" />
     </svg>
@@ -415,7 +422,14 @@ function IconMonitor({ className }: IconProps) {
 
 function IconMigrate({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      className={className}
+      aria-hidden="true"
+    >
       <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h13M13 3l4 4-4 4" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M20 17H7M11 13l-4 4 4 4" />
     </svg>
@@ -424,7 +438,14 @@ function IconMigrate({ className }: IconProps) {
 
 function IconCost({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      className={className}
+      aria-hidden="true"
+    >
       <circle cx="12" cy="12" r="8.5" />
       <path strokeLinecap="round" d="M12 7v10M14.5 9.5c0-1.1-1.1-2-2.5-2s-2.5.7-2.5 1.8c0 2.6 5 1.2 5 3.8 0 1.1-1.1 1.9-2.5 1.9s-2.5-.9-2.5-2" />
     </svg>
@@ -433,7 +454,14 @@ function IconCost({ className }: IconProps) {
 
 function IconShield({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      className={className}
+      aria-hidden="true"
+    >
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
     </svg>

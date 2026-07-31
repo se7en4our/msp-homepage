@@ -1,8 +1,5 @@
 import ObfuscatedEmail from "./ObfuscatedEmail";
 
-const SHA = process.env.BUILD_SHA ?? "dev";
-const BUILT_AT = process.env.BUILD_TIME ?? "";
-
 export default function Footer() {
   return (
     <footer className="border-t border-slate-200 py-10 dark:border-slate-800">
@@ -11,11 +8,8 @@ export default function Footer() {
         <p>
           <ObfuscatedEmail className="hover:text-brand-600 dark:hover:text-brand-400" />
         </p>
-        <p className="text-xs text-slate-400 dark:text-slate-500">
-          build {SHA} {BUILT_AT && `· ${BUILT_AT}`}
-        </p>
       </div>
-      <div className="mx-auto mt-4 flex max-w-6xl gap-4 px-6 text-xs text-slate-400 dark:text-slate-500">
+      <div className="mx-auto mt-4 flex max-w-6xl gap-4 px-6 text-xs text-slate-500 dark:text-slate-400">
         <a href="/privacy" className="hover:text-brand-600 dark:hover:text-brand-400">
           개인정보처리방침
         </a>

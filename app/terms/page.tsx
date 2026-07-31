@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 export const metadata: Metadata = {
   title: "이용약관 | 다온클라우드",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://daon.cloud/terms" },
 };
 
 const ARTICLES = [
