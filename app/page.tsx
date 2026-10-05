@@ -351,24 +351,29 @@ function Differentiator() {
     <section className="border-t border-slate-200 py-20 dark:border-slate-800">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="max-w-2xl text-2xl font-bold tracking-tight sm:text-3xl">
-          15년간 저희가 본 건 서버가 아니라,
+          인증이 필요해지는 순간은,
           <br />
-          인증 하나 때문에 멈춘 계약이었습니다.
+          대부분 계약 직전에 옵니다.
         </h2>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          대기업·공공 고객사와 계약이 눈앞인데, 마지막 관문인 보안 점검표나 ISMS 심사에서
-          막히는 팀을 자주 봅니다.
+          중소기업 대부분은 ISMS 의무 대상이 아닙니다. 그래도 인증이 필요해지는 순간은
+          옵니다. 대기업·금융권 고객사가 협력사 조건으로 요구할 때, 투자 실사에서 보안 체계를
+          물을 때, 서비스가 성장해 의무 대상 기준에 들어설 때입니다.
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          서버는 멀쩡히 돌고 있었습니다. 문제는{" "}
+          문제는 그때부터 준비하면 늦다는 겁니다. ISMS는 신청 전에{" "}
           <strong className="font-semibold text-slate-900 dark:text-slate-100">
-            접근권한을 누가 언제 부여했는지 증명할 수 없다는 것
+            최소 2개월 이상의 운영 증적
           </strong>
-          , 로그 보관 기간이 기준에 못 미친다는 것, 백업은 돌지만 복구를 해본 적이 없다는
-          것이었습니다.
+          이 있어야 합니다. 계약 일정은 기다려주지 않습니다.
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          심사에서 실제로 걸리는 항목은 정해져 있습니다. 구축 단계에서는 설정 하나로 끝날 일이{" "}
+          막히는 지점도 대부분 같습니다. 서버는 멀쩡히 돌고 있는데,{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            접근권한을 누가 언제 부여했는지 증명할 수 없고
+          </strong>
+          , 로그 보관 기간이 기준에 못 미치고, 백업은 돌지만 복구를 해본 적이 없습니다. 구축
+          단계에서는 설정 하나로 끝날 일이{" "}
           <strong className="font-semibold text-slate-900 dark:text-slate-100">
             운영 중에 고치면 재설계가 됩니다.
           </strong>
