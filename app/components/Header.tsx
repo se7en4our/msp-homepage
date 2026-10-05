@@ -5,6 +5,7 @@ import { useState } from "react";
 const NAV_LINKS = [
   { href: "/#services", label: "서비스" },
   { href: "/#why", label: "왜 다온클라우드" },
+  { href: "/#pricing", label: "플랜" },
   { href: "/#cases", label: "사례" },
   { href: "/#process", label: "프로세스" },
   { href: "/#faq", label: "FAQ" },

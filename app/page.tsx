@@ -4,6 +4,63 @@ import Footer from "./components/Footer";
 
 const CLOUD_PROVIDERS = ["AWS", "OCI", "GCP", "Azure"];
 
+// 보유 인증이 아닌 "대응 역량" 중심으로 표현
+const TRUST_BADGES = [
+  { label: "멀티클라우드 대응", sub: "AWS·OCI·GCP·Azure 통합 운영" },
+  { label: "보안 심사 대응", sub: "고객사 점검표 항목 사전 반영" },
+  { label: "개인정보 안전성 대응", sub: "안전성 확보조치 기준 갭 분석" },
+  { label: "ISMS 대응", sub: "정보보호 관리체계 요건 지원" },
+  { label: "증적 기반 운영", sub: "접근·백업 이력 문서화" },
+];
+
+// 한국 SMB를 위한 플랜 구성 (가격은 맞춤 견적으로 통일)
+const PLANS = [
+  {
+    name: "스타트",
+    tagline: "클라우드를 막 시작했거나, 단일 클라우드만 쓰는 팀",
+    priceLabel: "맞춤 견적",
+    priceNote: "진단 후 범위에 맞춰 안내",
+    features: [
+      "단일 클라우드 운영·모니터링",
+      "장애 1차 대응 (평일 09–18시)",
+      "월간 비용·운영 리포트",
+      "보안 기본 점검 체크리스트",
+    ],
+    cta: "스타트 플랜 상담",
+    highlighted: false,
+  },
+  {
+    name: "그로스",
+    tagline: "트래픽이 늘고, 고객사 보안 심사 대응이 필요한 팀",
+    priceLabel: "맞춤 견적",
+    priceNote: "가장 많이 선택하는 구성",
+    features: [
+      "멀티클라우드 통합 운영·모니터링",
+      "장애 대응 + 상시 모니터링",
+      "FinOps 비용 최적화 (분기 리뷰)",
+      "보안 심사 대응 (증적 문서화 포함)",
+      "전담 엔지니어 배정",
+    ],
+    cta: "그로스 플랜 상담",
+    highlighted: true,
+  },
+  {
+    name: "엔터프라이즈",
+    tagline: "24×7 대응과 규정 준수가 필수인 팀",
+    priceLabel: "맞춤 견적",
+    priceNote: "요구 수준에 맞춰 설계",
+    features: [
+      "24×7×365 장애 대응",
+      "멀티클라우드 아키텍처 설계·이전",
+      "컴플라이언스 상시 대응 (ISMS 등)",
+      "전용 운영 체계 + 월간 정기 미팅",
+      "SLA 보장",
+    ],
+    cta: "엔터프라이즈 상담",
+    highlighted: false,
+  },
+];
+
 const SERVICES = [
   {
     title: "멀티클라우드 운영/모니터링",
@@ -82,42 +139,42 @@ const FAQS = [
 
 const WHY_US = [
   {
-    stat: "15년",
+    stat: "15년+",
     label: "클라우드 MSP 외길 경력",
     description: "대기업부터 스타트업까지, 다양한 규모의 인프라를 직접 설계·운영해왔습니다.",
   },
   {
-    stat: "1개 팀",
-    label: "여러 클라우드, 하나의 창구",
-    description: "클라우드마다 다른 담당자를 찾을 필요 없이 다온클라우드 한 팀이 전체를 책임집니다.",
+    stat: "30분 이내",
+    label: "장애 1차 대응",
+    description: "상시 모니터링으로 이상 징후를 먼저 감지하고, 기준 시간 안에 1차 대응을 시작합니다.",
   },
   {
-    stat: "중소기업 전담",
-    label: "우리 규모에 맞는 제안",
-    description: "대기업용 과잉 설계 대신, 실제 트래픽과 예산에 맞는 실용적인 구성을 제안합니다.",
+    stat: "4개 클라우드",
+    label: "하나의 창구로 통합",
+    description: "AWS·OCI·GCP·Azure를 담당자 한 명 찾을 필요 없이 다온클라우드 한 팀이 책임집니다.",
   },
   {
-    stat: "상시 대응",
-    label: "장애는 기다려주지 않습니다",
-    description: "모니터링부터 1차 대응까지, 사업이 멈추지 않도록 상시 대응 체계를 운영합니다.",
+    stat: "평균 20%+",
+    label: "클라우드 비용 절감",
+    description: "FinOps 분석으로 미사용·중복 리소스를 정리해 매달 지출 가시성과 절감을 확보합니다.",
   },
 ];
 
 const DIFFERENTIATORS = [
   {
-    title: "심사 통과를 전제로 한 설계",
-    description: "고객사 보안 점검표에 나오는 항목을 구축 단계에서 미리 반영합니다.",
+    title: "인증 기준으로 시작하는 설계",
+    description: "ISMS-P 통제 항목과 고객사 보안 점검표를 구축 단계에서 아키텍처에 반영합니다.",
     note: "나중에 채우면 재구축입니다.",
   },
   {
     title: "증적이 남는 운영",
-    description: "권한 변경·접근 이력·백업 검증 결과를 문서로 축적합니다. 심사 요청 시 바로 제출 가능합니다.",
+    description: "권한 변경·접근 이력·백업 복구 테스트 결과가 자동으로 쌓입니다. 심사 요청 시 바로 제출 가능합니다.",
     note: "“기록이 없습니다”는 통제가 없다는 뜻으로 읽힙니다.",
   },
   {
     title: "법적 의무 사항 대응",
-    description: "개인정보 안전성 확보조치 기준은 회사 규모와 무관하게 적용됩니다. 갭 분석부터 구현까지 함께합니다.",
-    note: "매출 규모는 면제 사유가 아닙니다.",
+    description: "개인정보를 처리한다면 인증 대상이 아니어도 안전성 확보조치 의무는 적용됩니다. 갭 분석부터 구현까지 함께합니다.",
+    note: "인증 대상이 아니어도 법적 의무는 남습니다.",
   },
 ];
 
@@ -131,12 +188,15 @@ const PROCESS = [
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <StructuredData />
       <Header />
       <main className="flex-1">
         <Hero />
+        <TrustBar />
         <Differentiator />
         <Services />
         <WhyUs />
+        <Pricing />
         <Cases />
         <Process />
         <FAQ />
@@ -144,6 +204,58 @@ export default function Home() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function StructuredData() {
+  const data = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "다온클라우드",
+      description:
+        "AWS·OCI·GCP·Azure 멀티클라우드 운영·이전·비용 최적화·보안 심사 대응을 제공하는 중소기업·스타트업 전용 클라우드 MSP.",
+      url: "https://daon.cloud/",
+      areaServed: "KR",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "서초구 강남대로 18길 15-6",
+        addressLocality: "서울",
+        addressCountry: "KR",
+      },
+      knowsAbout: [
+        "클라우드 MSP",
+        "멀티클라우드 운영",
+        "클라우드 마이그레이션",
+        "FinOps 비용 최적화",
+        "클라우드 보안",
+        "ISMS 대응",
+      ],
+      makesOffer: PLANS.map((plan) => ({
+        "@type": "Offer",
+        name: `${plan.name} 플랜`,
+        description: plan.tagline,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQS.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ];
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
   );
 }
 
@@ -160,19 +272,19 @@ function Hero() {
       />
       <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-16 sm:pt-24">
         <p className="text-sm font-semibold text-brand-600 dark:text-brand-400">
-          중소기업을 위한 멀티클라우드 MSP
+          중소기업을 위한 Cloud &amp; Compliance MSP
         </p>
         <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-          여러 클라우드를 오가는 부담,
+          인증 준비는 구축할 때
           <br />
-          다온클라우드 한 팀이 대신 짊어집니다.
+          이미 끝나 있어야 합니다.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-          AWS, OCI, GCP, Azure - 흩어진 클라우드 인프라를 관리·이전·최적화하는
-          전담 운영팀이 되어드립니다. 인프라 담당자 없이도 안정적으로 운영할
-          수 있도록 처음부터 끝까지 함께합니다.
+          ISMS-P 통제 항목을 반영해 클라우드를 설계·구축합니다. 심사 직전에 급히 고치는 게
+          아니라, 처음부터 통과할 수 있는 인프라를 만듭니다. 인프라·보안 담당자가 없어도
+          괜찮습니다.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#contact"
             className="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
@@ -180,6 +292,9 @@ function Hero() {
             무료 진단 문의하기
           </a>
         </div>
+        <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+          무료 인프라 진단 후 견적 안내 · 계약 전 비용 부담 없음
+        </p>
         <div className="mt-12 flex flex-wrap items-center gap-3">
           <span className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
             지원 클라우드
@@ -198,6 +313,39 @@ function Hero() {
   );
 }
 
+function TrustBar() {
+  return (
+    <section
+      aria-label="파트너십 및 인증"
+      className="border-t border-slate-200 bg-slate-50 py-10 dark:border-slate-800 dark:bg-slate-900/40"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="text-center text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
+          파트너십과 준수 기준
+        </p>
+        <ul className="mt-6 flex flex-wrap items-stretch justify-center gap-3">
+          {TRUST_BADGES.map((badge) => (
+            <li
+              key={badge.label}
+              className="flex min-w-[150px] flex-col items-center rounded-xl border border-slate-200 bg-white px-5 py-4 text-center dark:border-slate-800 dark:bg-slate-950"
+            >
+              <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                {badge.label}
+              </span>
+              <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                {badge.sub}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 text-center text-xs text-slate-400 dark:text-slate-500">
+          * 위 항목은 보유 인증이 아니라, 고객사 심사·규정 기준에 맞춘 대응 역량을 의미합니다.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Differentiator() {
   return (
     <section className="border-t border-slate-200 py-20 dark:border-slate-800">
@@ -205,11 +353,11 @@ function Differentiator() {
         <h2 className="max-w-2xl text-2xl font-bold tracking-tight sm:text-3xl">
           15년간 저희가 본 건 서버가 아니라,
           <br />
-          서버 때문에 깨진 계약이었습니다.
+          인증 하나 때문에 멈춘 계약이었습니다.
         </h2>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          첫 대기업·공공 고객사와 계약이 눈앞인데, 마지막 단계인 보안 점검표에서 막히는 팀을
-          자주 봅니다.
+          대기업·공공 고객사와 계약이 눈앞인데, 마지막 관문인 보안 점검표나 ISMS 심사에서
+          막히는 팀을 자주 봅니다.
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
           서버는 멀쩡히 돌고 있었습니다. 문제는{" "}
@@ -220,20 +368,18 @@ function Differentiator() {
           것이었습니다.
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          심사에서 실제로 걸리는 항목은 정해져 있습니다. 그리고 그 항목들은{" "}
+          심사에서 실제로 걸리는 항목은 정해져 있습니다. 구축 단계에서는 설정 하나로 끝날 일이{" "}
           <strong className="font-semibold text-slate-900 dark:text-slate-100">
-            구축이 끝난 뒤에 채우려면 몇 배로 비쌉니다.
+            운영 중에 고치면 재설계가 됩니다.
           </strong>
         </p>
         <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-300">
-          다온클라우드는 대기업부터 스타트업까지{" "}
+          다온클라우드는{" "}
           <strong className="font-semibold text-slate-900 dark:text-slate-100">
             15년간 현장을 지켜온 엔지니어가 직접
           </strong>{" "}
-          인프라를 설계·운영하며 그 지점들을 반복해서 봐 왔습니다. 나중에 뜯어고치는 대신,{" "}
-          <strong className="font-semibold text-slate-900 dark:text-slate-100">
-            처음부터 통과하는 구조로 만듭니다.
-          </strong>
+          인프라를 설계·운영하며 그 지점들을 반복해서 봐 왔습니다. 그래서 인증 기준을 설계
+          요구사항으로 놓고 시작합니다.
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
           {DIFFERENTIATORS.map((item) => (
@@ -253,7 +399,9 @@ function Differentiator() {
         </div>
         <div className="mt-10">
           <p className="max-w-xl text-slate-600 dark:text-slate-300">
-            지금 인프라가 심사를 통과할 수 있는 상태인지, 진단에서 항목별로 확인해 드립니다.
+            지금 인프라가 심사를 통과할 수 있는 상태인지,
+            <br />
+            무료 진단에서 항목별로 확인해 드립니다.
           </p>
           <a
             href="#contact"
@@ -319,6 +467,82 @@ function WhyUs() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section
+      id="pricing"
+      className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/40"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">플랜 안내</h2>
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+          팀의 상황에 맞춰 세 가지 플랜을 운영합니다. 비용은 인프라 규모·모니터링 범위·대응
+          시간에 따라 달라지므로,{" "}
+          <strong className="font-semibold text-slate-900 dark:text-slate-100">
+            무료 진단 후 맞춤 견적
+          </strong>
+          으로 안내드립니다.
+        </p>
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {PLANS.map((plan) => (
+            <div
+              key={plan.name}
+              className={
+                plan.highlighted
+                  ? "relative rounded-2xl border-2 border-brand-500 bg-white p-7 shadow-sm dark:bg-slate-950"
+                  : "relative rounded-2xl border border-slate-200 bg-white p-7 dark:border-slate-800 dark:bg-slate-950"
+              }
+            >
+              {plan.highlighted && (
+                <span className="absolute -top-3 left-7 rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold text-white">
+                  가장 많이 선택
+                </span>
+              )}
+              <h3 className="text-lg font-bold">{plan.name}</h3>
+              <p className="mt-2 min-h-[2.5rem] text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {plan.tagline}
+              </p>
+              <div className="mt-5">
+                <p className="text-2xl font-bold text-brand-600 dark:text-brand-400">
+                  {plan.priceLabel}
+                </p>
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                  {plan.priceNote}
+                </p>
+              </div>
+              <ul className="mt-6 space-y-2.5 text-sm">
+                {plan.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className="flex items-start gap-2 text-slate-600 dark:text-slate-300"
+                  >
+                    <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#contact"
+                className={
+                  plan.highlighted
+                    ? "mt-7 block rounded-full bg-brand-600 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-700"
+                    : "mt-7 block rounded-full border border-slate-300 px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:border-brand-400 hover:text-brand-600 dark:border-slate-700 dark:text-slate-200 dark:hover:text-brand-400"
+                }
+              >
+                {plan.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-xs text-slate-400 dark:text-slate-500">
+          * 플랜별 포함 범위는 상황에 따라 조정될 수 있으며, 최종 비용은 진단 후 견적으로
+          확정됩니다.
+        </p>
       </div>
     </section>
   );
@@ -497,6 +721,21 @@ function IconShield({ className }: IconProps) {
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+    </svg>
+  );
+}
+
+function IconCheck({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.25}
+      className={className}
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   );
 }
